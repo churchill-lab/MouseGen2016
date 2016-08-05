@@ -4,13 +4,13 @@ Sys.setenv(DO_PAT = "*** REPLACE THIS BY YOUR DIGITAL OCEAN API KEY ***")
 d <- docklet_create(size = getOption("do_size", "8gb"),
                     region = getOption("do_region", "nyc2"))
 
+# Needed to add this to update the IP address. OTherwise, I got a "network not up yet" error.
+d = droplet(d$id)
+
 # pull images
 d %>% docklet_pull("rocker/hadleyverse")
 d %>% docklet_pull("churchill/ibangs2016")
 d %>% docklet_images()
-
-# Needed to add this to update the IP address. OTherwise, I got a "network not up yet" error.
-d = droplet(d$id)
 
 # download files to /data folder, takes ~30mins
 lines <- "wget https://raw.githubusercontent.com/churchill-lab/MouseGen2016/master/scripts/download_data_from_ftp.sh
