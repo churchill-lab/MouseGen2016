@@ -23,7 +23,7 @@ chars = sort(unique(unlist(strsplit(participants[,1], split = ""))))
 stopifnot(chars %in% c(LETTERS, letters, 0:9, ".", "-"))
 
 # Trying new command to make multiple machines at once.
-img = images(private = TRUE)[["churchill/mousegen2016"]]
+img = images(private = TRUE)[["churchill/ibangs2016"]]
 # NOTE: You may get an error if you create more than 10 machines.  Just make
 #       multiple calls to this function and stack up the droplets.
 droplet_list = droplets_create(names = participants[1:10,1], size = "8gb", image = img[["id"]],
@@ -41,7 +41,7 @@ for(i in 1:N) {
   
   # start the container.
   d %>% docklet_run("-d", " -v /data:/data", " -v /tutorial:/tutorial", " -p 8787:8787", 
-                    " -e USER=rstudio", " -e PASSWORD=mdibl ", "--name myrstudio ", "churchill/ibangs2016") %>%
+                    " -e USER=rstudio", " -e PASSWORD=mousegen", "--name myrstudio ", "churchill/ibangs2016") %>%
                     droplet_wait()
 
   # add symbolic links
