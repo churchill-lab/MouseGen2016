@@ -23,14 +23,14 @@ analogsea:::do_system(d, cmd, verbose = TRUE)
 d %>%
   droplet_power_off() %>%
   droplet_wait() %>%
-  droplet_snapshot(name = "churchill/ibangs2016")
+  droplet_snapshot(name = "mousegen2016")
 
 # Destroy the source droplet to see if we can re-make it using the image.
 droplet_delete(d)
 rm(d)
 
 # Run the one machine.
-img = images(private = TRUE)[["churchill/ibangs2016"]]
+img = images(private = TRUE)[["mousegen2016"]]
 d = droplet_create(name = "droplet1", size = "8gb", image = img[["id"]],
                    region = "nyc2")
 
