@@ -23,7 +23,7 @@ chars = sort(unique(unlist(strsplit(participants[,1], split = ""))))
 stopifnot(chars %in% c(LETTERS, letters, 0:9, ".", "-"))
 
 # Trying new command to make multiple machines at once.
-img = images(private = TRUE)[["churchill/mdibl2016"]]
+img = images(private = TRUE)[["churchill/mousegen2016"]]
 # NOTE: You may get an error if you create more than 10 machines.  Just make
 #       multiple calls to this function and stack up the droplets.
 droplet_list = droplets_create(names = participants[1:10,1], size = "8gb", image = img[["id"]],
