@@ -13,7 +13,7 @@ d %>% docklet_images()
 d = droplet(d$id)
 
 # download files to /data folder, takes ~30mins
-lines <- "wget https://raw.githubusercontent.com/churchill-lab/MDIBL_Aging2016/master/scripts/download_data_from_ftp.sh
+lines <- "wget https://raw.githubusercontent.com/churchill-lab/MouseGen2016/master/scripts/download_data_from_ftp.sh
           /bin/bash download_data_from_ftp.sh
           rm download_data_from_ftp.sh"
 cmd <- paste0("ssh ", analogsea:::ssh_options(), " ", "root", "@", analogsea:::droplet_ip(d)," ", shQuote(lines))
@@ -23,14 +23,14 @@ analogsea:::do_system(d, cmd, verbose = TRUE)
 d %>%
   droplet_power_off() %>%
   droplet_wait() %>%
-  droplet_snapshot(name = "churchill/mdibl2016")
+  droplet_snapshot(name = "churchill/mousegen2016")
 
 # Destroy the source droplet to see if we can re-make it using the image.
 droplet_delete(d)
 rm(d)
 
 # Run the one machine.
-img = images(private = TRUE)[["churchill/mdibl2016"]]
+img = images(private = TRUE)[["churchill//mousegen2016"]]
 d = droplet_create(name = "droplet1", size = "8gb", image = img[["id"]],
                    region = "nyc2")
 
