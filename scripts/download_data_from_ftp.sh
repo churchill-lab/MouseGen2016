@@ -8,12 +8,17 @@ wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/IBANGS2016/data/DO_Sanger
 wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/IBANGS2016/data/DO_Sanger_SDPs.txt.bgz.tbi
 wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/IBANGS2016/data/assoc_perms.rds
 wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/MDIBL_Aging2016/DOQTL_demo.Rdata
+wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/ShortCourse2015/DO192_DataforSysGenCourse.Rdata
+wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/ShortCourse2015/emase/expected_read_counts_gene_level.txt
 
 # Copy the tutorial directory.
 wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/MDIBL_Aging2016/DO.impute.founders.sm.png
 wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/MDIBL_Aging2016/DOQTL_demo.Rmd
 wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/MDIBL_Aging2016/DOQTL_demo.html
 wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/MDIBL_Aging2016/DOQTL_demo.R
+wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/ShortCourse2015/tutorials/Differential-Expression.R
+wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/ShortCourse2015/tutorials/Differential-Expression.Rmd
+wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/ShortCourse2015/tutorials/Differential-Expression.html
 
 # Copy figures.
 wget --directory-prefix=/tutorial/figure ftp://ftp.jax.org/dgatti/MDIBL_Aging2016/figure/benzene_hypothesis.png
