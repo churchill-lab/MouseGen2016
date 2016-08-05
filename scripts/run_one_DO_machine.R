@@ -39,7 +39,7 @@ d = droplet(d$id)
 
 # start the container.
 d %>% docklet_run("-d", " -v /data:/data", " -v /tutorial:/tutorial", " -p 8787:8787", 
-                  " -e USER=rstudio", " -e PASSWORD=mousegen", "--name myrstudio ", "churchill/ibangs2016")
+                  " -e USER=rstudio", " -e PASSWORD=mousegen ", "--name myrstudio ", "churchill/ibangs2016")
 
 # add symbolic links
 lines2 <- "docker exec myrstudio ln -s /data /home/rstudio/data
