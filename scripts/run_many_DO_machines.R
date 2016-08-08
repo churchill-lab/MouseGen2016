@@ -12,8 +12,8 @@ participants <- read.csv("MouseGen2016_roster.csv", as.is=TRUE)
 N = nrow(participants)
 
 # Single machine.
-#img = images(private = TRUE)[["churchill/mdibl2016"]]
-#d = droplet_create(name = "droplet1", size = "8gb", image = img[["id"]],
+#img = images(private = TRUE)[["mousegen2016"]]
+#d = droplet_create(name = "droplet2", size = "8gb", image = img[["id"]],
 #                   region = "nyc2")
 
 # We have to make the e-mail addresses have only A-Z, a-z, . and -.
