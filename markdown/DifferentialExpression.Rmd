@@ -1,5 +1,6 @@
 ---
-title: "Differential Expression Analysis by DESeq2: RNA-seq workshop at 21st Century Mouse Genetics 2016"
+title: 'Differential Expression Analysis by DESeq2: RNA-seq workshop at 21st Century
+  Mouse Genetics 2016'
 author: "Narayanan Raghupathy, The Jackson Laboratory"
 date: "August 11, 2016"
 output: html_document
@@ -14,6 +15,10 @@ We will be using read counts at gene level and the software tool **DESeq2** for 
 R Libraries and Data Import
 ------------------------------------
 Let us load the R packages and the data needed for the differential expression analysis.
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+```
+
 ```{r R_package, results="hide"}
 library(DESeq2)
 library(ggplot2)
@@ -69,7 +74,7 @@ p <- p + geom_point(position = position_jitter(width = 0.1),size=3,
 p <- p + stat_summary(fun.y=mean, geom="point", shape=5, size=4)
 p <- p + ylab("Gene Expression (Read Counts)")
 p <- p + theme(axis.text=element_text(size=12),
-               axis.title=element_text(size=20,face="bold", colour = "blue"),
+               axis.title=element_text(size=12,face="bold", colour = "blue"),
                plot.title = element_text(size = rel(2)))
 p <- p + ggtitle("Xist: ENSMUSG00000086503")
 p
@@ -120,43 +125,48 @@ colData <- DataFrame(group = factor(exp_design_diet_DE$diet))
 ```
 ```{r deseq2_obj, results="hide"}
 ### Create DESeq2 object using expression and colData
-dds <- DESeqDataSetFromMatrix(countData = as.data.frame(round(exp.dietDE)),
+dds_3reps <- DESeqDataSetFromMatrix(countData = as.data.frame(round(exp.dietDE)),
          colData = colData, design = ~ group)
-dds <- DESeq(dds)
-res = results(dds)
+dds_3reps <- DESeq(dds_3reps)
+res_3reps = results(dds_3reps)
+resOrdered_3reps <- res_3reps[order(res_3reps$padj),]
+head(resOrdered_3reps)
 ```
-```{r res_summary, results="hide"}
+```{r res_summary}
 ### summary of Differential Expression analysis
-summary(res)
+summary(res_3reps)
 ```
 ```{r MA_plot, results="hide"}
 par(mfrow=c(1,1))
-plotMA(res, main="M-A Plot: 3 Samples per group", ylim=c(-2,2))
+plotMA(res_3reps, main="M-A Plot: 3 Samples per group", ylim=c(-2,2))
 ```
-```{r gene_plot, results="hide"}
-d<-plotCounts(dds, gene=which.min(res$padj), intgroup="group",
-              returnData=TRUE)
-p <- ggplot(d, aes(x=group, y=count)) +
-  geom_point(position=position_jitter(w=0.2,h=0),size=3)
-p <- p + theme(axis.text=element_text(size=12),
-               axis.title=element_text(size=20,face="bold", colour = "blue"),
-               plot.title = element_text(size = rel(2)))
-p
+```{r top_gene_plots, results="hide"}
+par(mfrow=c(2,3),las=1)
+top5_genes= rownames(resOrdered_3reps[1:6,])
+for (i in 1:length(top5_genes)){
+  g_id = top5_genes[i]
+  data <- plotCounts(dds_3reps, gene=g_id, intgroup=c("group"), returnData=TRUE)
+  p <- ggplot(data, aes(x=group, y=count, color=group))
+  p <- p+ ggtitle(g_id)
+  p <- p+ geom_point(position=position_jitter(width=.1,height=0), size=3)
+  p <- p + theme(axis.text=element_text(size=12),axis.title=element_text(size=20,face="bold", colour = "blue"),  plot.title = element_text(size =rel(1.5)))
+  print(p)
+}
 ```
 Let us plot the histogram of p-values. The p-value histogram is a good diagnostic test for the differential expression analysis.
 
 ```{r pval_hist, results="hide"}
-hist(res$pvalue,breaks=100,col="grey", xlab="p-value",main="p-value histogram: 3 Samples per group")
+hist(res_3reps$pvalue,breaks=100,col="grey", xlab="p-value",main="p-value histogram: 3 Samples per group")
 ```
 
 Differential Expression Analysis with **ten** samples in each **diet** group
 ------------------------------------------------------------------
 
-```{r sample_size_10, results="hide"}
-sampleSize = 10
+```{r sample_size_6, results="hide"}
+sampleSize = 6
 ```
 Later on we will see the effect of sample size by varying it.
-```{r subset_exp_10, results="hide"}
+```{r subset_exp_6, results="hide"}
 diet_DE = c(male_chow[1:sampleSize],male_hf[1:sampleSize])
 exp_design_diet_DE= exp_design[diet_DE,]
 exp_design_diet_DE
@@ -164,12 +174,12 @@ exp_diet_DE=exp.all[,diet_DE]
 all(colnames(exp_diet_DE)==as.vector(exp_design_diet_DE$mouseIDs))
 head(exp_diet_DE)
 ```
-```{r head_exp_10}
+```{r head_exp_6}
 head(exp_diet_DE)
 ```
 
 Let us filter out genes with zero and low expression (less than 5 read counts) in 50% of the samples.
-```{r filter_exp_10, results="hide"}
+```{r filter_exp_6, results="hide"}
 thres= 5
 nzIndex= as.vector(which(apply(exp_diet_DE,1,function(x){sum(x>thres)/length(x)})>=0.5))
 head(nzIndex)
@@ -177,36 +187,43 @@ exp.dietDE = exp_diet_DE[nzIndex,]
 dim(exp.dietDE)
 ```
 Let us create data frames for DESeq2 object
-```{r dataframe_deseq2_10, results="hide"}
+```{r dataframe_deseq2_6, results="hide"}
 ### colData contains the condition/group information for Differenetial expression analysis
 colData <- DataFrame(group = factor(exp_design_diet_DE$diet))
 ```
-```{r deseq2_obj_10, results="hide"}
+```{r deseq2_obj_6, results="hide"}
 ### Create DESeq2 object using expression and colData
-dds <- DESeqDataSetFromMatrix(countData = as.data.frame(round(exp.dietDE)),
+dds_6reps <- DESeqDataSetFromMatrix(countData = as.data.frame(round(exp.dietDE)),
          colData = colData, design = ~ group)
-dds <- DESeq(dds)
-res = results(dds)
+dds_6reps <- DESeq(dds_6reps)
+res_6reps = results(dds_6reps)
+resOrdered_6reps <- res_6reps[order(res_6reps$padj),]
+head(resOrdered_6reps)
+
 ```
-```{r res_summary_10, results="hide"}
+```{r res_summary_6}
 ### summary of Differential Expression analysis
-summary(res)
+summary(res_6reps)
 ```
-```{r MA_plot_10, results="hide"}
-plotMA(res, main="M-A Plot: 10 Samples per group", ylim=c(-2,2))
+```{r MA_plot_6}
+plotMA(res_6reps, main="M-A Plot: 6 Samples per group", ylim=c(-2,2))
 ```
-```{r gene_plot_10, results="hide"}
-d<-plotCounts(dds, gene=which.min(res$padj), intgroup="group",
-              returnData=TRUE)
-p <- ggplot(d, aes(x=group, y=count)) +
-  geom_point(position=position_jitter(w=0.2,h=0),size=3)
-p <- p + theme(axis.text=element_text(size=12),
-               axis.title=element_text(size=20,face="bold", colour = "blue"),
-               plot.title = element_text(size = rel(2)))
-p
+```{r top_gene_plots_6}
+top5_genes= rownames(resOrdered_6reps[1:6,])
+par(mfrow=c(2,3),las=1)
+for (i in 1:length(top5_genes)){
+  g_id = top5_genes[i]
+  data <- plotCounts(dds_6reps, gene=g_id, intgroup=c("group"), returnData=TRUE)
+  p <- ggplot(data, aes(x=group, y=count, color=group))
+  p <- p+ ggtitle(g_id)
+  p <- p+ geom_point(position=position_jitter(width=.1,height=0), size=3)
+  p <- p + theme(axis.text=element_text(size=12),axis.title=element_text(size=12,face="bold", colour = "blue"),  plot.title = element_text(size =rel(1.5)))
+  print(p)
+}
 ```
-```{r pval_hist_10, results="hide"}
-hist(res$pvalue,breaks=100,col="grey", xlab="p-value",main="p-value Histogram: 10 Samples per group")
+
+```{r pval_hist_6}
+hist(res_6reps$pvalue,breaks=100,col="grey", xlab="p-value",main="p-value Histogram: 6 Samples per group")
 ```
 
 ```{r svd_pca, results="hide"}
