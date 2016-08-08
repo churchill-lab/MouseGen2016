@@ -1,15 +1,13 @@
 ---
-title: "Differential Expression Analysis by DESeq2: RNA-seq workshop at Systems Genetics Short Course 2015"
+title: "Differential Expression Analysis by DESeq2: RNA-seq workshop at 21st Century Mouse Genetics 2016"
 author: "Narayanan Raghupathy, The Jackson Laboratory"
-date: "September 25, 2015"
+date: "August 11, 2016"
 output: html_document
 ---
 
-One of the most common applications of RNA-seq technology is using it for identifying genes that are differentially expressed between sample groups, for example, wild type vs mutant, or cancer vs normal samples. 
+One of the most common applications of RNA-seq technology is using it for identifying genes that are differentially expressed between sample groups. Typical examples include differential expression analysis between wild type and mutant samples, or cancer vs normal samples. 
 
-In the last section, We saw an example of how we can use **EMASE** powereed by **Kallisto** pseudo-alignment (instead of bowtie alignment) and quantify expression abundances at isoform/gene level for a single animal from Diversity Outbred mouse population. 
-
-Let us assume that we have used the same pipeline and quantified expression abundances for all 192 DO samples.
+Let us assume that we have quantified total gene expression for all known genes using RNA-seq analysis pipeline discussed earlier for Diversity Outbred mouse populations under different diets. 
 
 We will be using read counts at gene level and the software tool **DESeq2** for doing differential expression analysis on a subset of the DO mice. 
 
@@ -17,15 +15,15 @@ R Libraries and Data Import
 ------------------------------------
 Let us load the R packages and the data needed for the differential expression analysis.
 ```{r R_package, results="hide"}
-library("DESeq2")
+library(DESeq2)
 library(ggplot2)
 library(dplyr)
 ```
 
 Let us load the R object file containing all the data we need.
 ```{r load_Robj, results="hide"}
-load("/data/RData/DO192_DataforSysGenCourse.rdata")
-exp.all = read.table("/data/emase/expected_read_counts_gene_level.txt", header=T)
+load("data/DO192_DataforSysGenCourse.rdata")
+exp.all = read.table("data/expected_read_counts_gene_level.txt", header=T)
 ```
 
 Let us check the expression data and make it a matrix.
@@ -78,7 +76,7 @@ p
 ```
 
 
-Let us start with an example identifyingthe genes that are differentially expressed in the samples between two diets **Chow** and **High fat**.
+Let us start with an example identifying the genes that are differentially expressedbetween two diets **Chow** and **High fat**.
 
 ```{r sample_ind, results="hide"}
 male_index = which(exp_design$sex=="M")
@@ -132,6 +130,7 @@ res = results(dds)
 summary(res)
 ```
 ```{r MA_plot, results="hide"}
+par(mfrow=c(1,1))
 plotMA(res, main="M-A Plot: 3 Samples per group", ylim=c(-2,2))
 ```
 ```{r gene_plot, results="hide"}
