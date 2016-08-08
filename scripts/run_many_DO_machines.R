@@ -38,7 +38,7 @@ droplet_list[21:N] = droplets_create(names = participants[21:N,email.column], si
 for(i in 1:N) {
   print(i)
   # select droplet
-  d = droplet(droplet_list[[i]]$id)
+  d = droplets()[[droplet_list[[i]]$name]]
   
   # start the container.
   d %>% docklet_run("-d", " -v /data:/data", " -v /tutorial:/tutorial", " -p 8787:8787", 
