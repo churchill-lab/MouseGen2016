@@ -52,6 +52,19 @@ for(i in 1:N) {
   analogsea:::do_system(d, cmd2, verbose = TRUE)
 } # for(i)
 
+# Add teh IP address to the participant list.
+participants = read.csv("MouseGen2016_roster.csv", as.is=TRUE)
+participants = data.frame(participants, IP.address = rep(NA, nrow(participants)))
+for(i in 1:nrow(participants)) {
+  print(i)
+  # select droplet
+  d = droplet(droplet_list[[i]]$id)
+  participants$IP.address[i] = d$networks$v4[[1]]$ip_address
+} # for(i)
+participants$IP.address = paste0(participants$IP.address, ":8787")
+write.table(participants, "MouseGen2016_roster_withIP.tsv", quote = FALSE, 
+            row.names = FALSE, sep = "\t")
+
 #############################################################################
 # NOTE: Didn't use the following for the course. I just sent e-mails by hand.
 #############################################################################
