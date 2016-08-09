@@ -61,7 +61,7 @@ for(i in 1:nrow(participants)) {
   d = droplet(droplet_list[[i]]$id)
   participants$IP.address[i] = d$networks$v4[[1]]$ip_address
 } # for(i)
-participants$IP.address = paste0(participants$IP.address, ":8787")
+participants$IP.address = paste0("http://", participants$IP.address, ":8787")
 write.table(participants, "MouseGen2016_roster_withIP.tsv", quote = FALSE, 
             row.names = FALSE, sep = "\t")
 
