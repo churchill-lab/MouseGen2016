@@ -17,9 +17,9 @@ wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/MDIBL_Aging2016/DO.im
 wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/MDIBL_Aging2016/DOQTL_demo.Rmd
 wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/MDIBL_Aging2016/DOQTL_demo.html
 wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/MDIBL_Aging2016/DOQTL_demo.R
-wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/ShortCourse2015/tutorials/Differential-Expression.R
-wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/ShortCourse2015/tutorials/Differential-Expression.Rmd
-wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/ShortCourse2015/tutorials/Differential-Expression.html
+wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/MouseGen2016/DifferentialExpression.R
+wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/MouseGen2016/DifferentialExpression.Rmd
+wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/MouseGen2016/DifferentialExpression.html
 
 # Copy figures.
 wget --directory-prefix=/tutorial/figure ftp://ftp.jax.org/dgatti/MDIBL_Aging2016/figure/benzene_hypothesis.png
