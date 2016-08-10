@@ -10,6 +10,7 @@ wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/IBANGS2016/data/assoc_per
 wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/MDIBL_Aging2016/DOQTL_demo.Rdata
 wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/ShortCourse2015/DO192_DataforSysGenCourse.Rdata
 wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/ShortCourse2015/emase/expected_read_counts_gene_level.txt
+wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/ShortCourse2015/ENSMUSG-gene-info-R84.tsv
 
 # Copy the tutorial directory.
 wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/MDIBL_Aging2016/DO.impute.founders.sm.png
