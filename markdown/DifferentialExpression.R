@@ -7,7 +7,7 @@ library(ggplot2)
 library(dplyr)
 
 ## ----load_Robj, results="hide"-------------------------------------------
-load("data/DO192_DataforSysGenCourse.rdata")
+load("data/DO192_DataforSysGenCourse.Rdata")
 exp.all = read.table("data/expected_read_counts_gene_level.txt", header=T)
 
 ## ----exp_data, results="hide"--------------------------------------------
