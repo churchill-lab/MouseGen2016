@@ -11,6 +11,10 @@ wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/MDIBL_Aging2016/DOQTL_dem
 wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/ShortCourse2015/DO192_DataforSysGenCourse.Rdata
 wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/ShortCourse2015/emase/expected_read_counts_gene_level.txt
 wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/ShortCourse2015/ENSMUSG-gene-info-R84.tsv
+wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/MouseGen2016/B6-100K.fastq
+wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/MouseGen2016/Cast-100K.fastq
+wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/MouseGen2016/DO.chr1XY.sorted.bam
+wget --directory-prefix=/data ftp://ftp.jax.org/dgatti/MouseGen2016/DO.chr1XY.sorted.bam.bai
 
 # Copy the tutorial directory.
 wget --directory-prefix=/tutorial ftp://ftp.jax.org/dgatti/MDIBL_Aging2016/DO.impute.founders.sm.png
