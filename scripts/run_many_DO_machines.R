@@ -52,7 +52,7 @@ for(i in 1:N) {
   analogsea:::do_system(d, cmd2, verbose = TRUE)
 } # for(i)
 
-# Add teh IP address to the participant list.
+# Add the IP address to the participant list.
 participants = read.csv("MouseGen2016_roster.csv", as.is=TRUE)
 participants = data.frame(participants, IP.address = rep(NA, nrow(participants)))
 for(i in 1:nrow(participants)) {
